@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Rice Details</title>
+    <style>
+        table
+        {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+
+
+</head>
+<body>
+<h1>Rice Details</h1>
+
+<a th:href="@{/transactions/new}">Add New Transaction</a>
+
+<form th:action="@{/transactions/search}" method="get">
+    <input type="date" name="date" />
+    <button type="submit">Search</button>
+</form>
+
+<table>
+    <tr>
+        <th>Date</th>
+        <th>Type</th>
+        <th>Price</th>
+        <th>Quantity (Kg)</th>
+        <th>Location</th>
+    </tr>
+    <tr th:each="t : ${transactions}">
+        <td th:text="${t.localDate}"></td>
+        <td th:text="${t.type}"></td>
+        <td th:text="${t.price}"></td>
+        <td th:text="${t.quantity}"></td>
+        <td th:text="${t.location}"></td>
+    </tr>
+</table>
+</body>
+</html>
