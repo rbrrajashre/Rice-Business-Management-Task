@@ -15,7 +15,7 @@ public class Controller {
 
     private final Service service;
 
-    public TransactionController(Service service) {
+    public Controller(Service service) {
         this.service = service;
     }
 
