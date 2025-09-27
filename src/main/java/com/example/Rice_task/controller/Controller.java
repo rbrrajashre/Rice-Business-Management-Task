@@ -12,7 +12,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/transactions")
-public class TransactionController {
+public class Controller {
 
     private final Service service;
 
