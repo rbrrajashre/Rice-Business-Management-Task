@@ -1,54 +1,42 @@
 package com.example.Rice_task.controller;
 
+
 import com.example.Rice_task.entity.Entity;
 import com.example.Rice_task.service.Service;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
-@Controller
-@RequestMapping("/transactions")
+
+@org.springframework.stereotype.Controller
+@RequestMapping("/")
 public class Controller {
 
-    private final Service service;
+    private Service service;
 
-    public TransactionController(Service service) {
+    public Controller(Service service)
+    {
         this.service = service;
     }
 
-    // Redirect root path to the transactions list
-    @GetMapping("/")
-    public String redirectToTransactions() {
-        return "redirect:/transactions";
-    }
 
-    // List all transactions
     @GetMapping
     public String listTransactions(Model model) {
+
         List<Entity> transactions = service.getAllDetails();
         model.addAttribute("transactions", transactions);
         return "transactions";
     }
 
-    // Show form to add new transaction
     @GetMapping("/new")
     public String showAddForm(Model model) {
         model.addAttribute("transaction", new Entity());
         return "transaction-form";
     }
 
-    // Handle form submission to save a transaction
-    @PostMapping
-    public String saveTransaction(@ModelAttribute("transaction") Entity details) {
-        service.save(details);
-        return "redirect:/transactions";
-    }
-
-    // Search transactions by date
     @GetMapping("/search")
     public String searchByDate(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
                                Model model) {
@@ -56,4 +44,12 @@ public class Controller {
         model.addAttribute("transactions", transactions);
         return "transactions";
     }
+    @PostMapping
+    public String saveTransaction(@ModelAttribute Entity details) {
+        service.save(details);
+        return "redirect:/transactions";
+    }
+
 }
+
+
