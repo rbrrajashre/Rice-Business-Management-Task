@@ -22,6 +22,10 @@ public class Controller {
         this.service = service;
     }
 
+    @GetMapping("/")
+    public String home() {
+        return "✅ Spring Boot is deployed and connected to Aiven MySQL!";
+    }
 
     @GetMapping
     public String listTransactions(Model model) {
